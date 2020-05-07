@@ -1,0 +1,23 @@
+import requests
+
+headers = {
+  'user-agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/81.0.4044.138 Safari/537.36'
+}
+login_data = {
+  'log': '', #你的账号，请获取后填入''中
+  'pwd': '', #你的密码，请获取后填入''中
+  'wp-submit': '登录',
+  'redirect_to': '', #你要评论的网站，若不清楚不要改动。请获取后填入''中
+  'testcookie': '1'
+}
+comment_data = {
+  'comment': '', #你要发的评论
+  'submit': '发表评论',
+  'comment_post_ID': '', #你的账号ID，请获取后填入''中
+  'comment_parent': '0',
+  '_wp_unfiltered_html_comment': '78a37a27de',
+}
+
+login = requests.post('', data = login_data, headers = headers) #''内填入登录网址
+comment = requests.post('', cookies = login.cookies, data = comment_data, headers = headers) #''内填入评论网址
+print(comment.status_code)
